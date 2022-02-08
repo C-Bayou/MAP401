@@ -17,7 +17,7 @@ int main(int argc, char **argv){
     while (boucle){
         memoriser_position(position);
         avancer(&position,o);
-        nouvelle_orientation(I,o,position);
+        nouvelle_orientation(I,&o,position);
         if ((position.x == depart.x - 1) && (position.y == depart.y - 1) && (o == Est)){
             boucle = false;
         }

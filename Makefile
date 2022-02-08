@@ -91,26 +91,42 @@ test_geom2d.o : test_geom2d.c geometrie2d.h
 	@echo "---------------------------------------------"
 	$(CC) -c $(COMPILOPTS) $<
 
-contour.o : contour.c contour.h sequence.h
+contour.o : contour.c contour.h sequence_point.h
 	@echo ""
 	@echo "---------------------------------------------"
 	@echo "Compilation du module contour"
 	@echo "---------------------------------------------"
 	$(CC) -c $(COMPILOPTS) $<
 
-Sequence_point.o : Sequence_point.c Sequence_point.h geometrie2d.h
-	@echo ""
-	@echo "---------------------------------------------"
-	@echo "Compilation du module contour"
-	@echo "---------------------------------------------"
-	$(CC) -c $(COMPILOPTS) $<
-
-test_contour.o : test_contour.c contour.h geometrie2d.h types_macros.h image.h Sequence_point.h
+contour2.o : contour2.c contour.h  sequence_point.h
 	@echo ""
 	@echo "---------------------------------------------"
 	@echo "Compilation du module test_contour"
 	@echo "---------------------------------------------"
 	$(CC) -c $(COMPILOPTS) $<
+		
+
+sequence_point.o : sequence_point.c sequence_point.h geometrie2d.h
+	@echo ""
+	@echo "---------------------------------------------"
+	@echo "Compilation du module contour"
+	@echo "---------------------------------------------"
+	$(CC) -c $(COMPILOPTS) $<
+
+test_contour.o : test_contour.c contour.h geometrie2d.h types_macros.h image.h sequence_point.h
+	@echo ""
+	@echo "---------------------------------------------"
+	@echo "Compilation du module test_contour"
+	@echo "---------------------------------------------"
+	$(CC) -c $(COMPILOPTS) $<
+
+test_contour2.o : test_contour2.c contour.h geometrie2d.h types_macros.h image.h sequence_point.h
+	@echo ""
+	@echo "---------------------------------------------"
+	@echo "Compilation du module test_contour"
+	@echo "---------------------------------------------"
+	$(CC) -c $(COMPILOPTS) $<
+		
 		
 		
 ########################################################
@@ -130,13 +146,19 @@ test_geom2d : test_geom2d.o geometrie2d.o
 	@echo "---------------------------------------------"
 	$(CC) $^ $(LDOPTS) -o $@
 
-test_contour : test_contour.o contour.o Sequence_point.o
+test_contour : test_contour.o contour.o geometrie2d.o sequence_point.o
 	@echo ""
 	@echo "---------------------------------------------"
 	@echo "Creation de l'executable "$@
 	@echo "---------------------------------------------"
 	$(CC) $^ $(LDOPTS) -o $@
 
+test_contour2 : test_contour2.o contour2.o geometrie2d.o sequence_point.o
+	@echo ""
+	@echo "---------------------------------------------"
+	@echo "Creation de l'executable "$@
+	@echo "---------------------------------------------"
+	$(CC) $^ $(LDOPTS) -o $@
 # regle pour "nettoyer" le r�pertoire
 clean:
 	rm -fR $(EXECUTABLES) *.o 

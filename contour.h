@@ -13,15 +13,15 @@ Point trouver_pixel_depart(Image I);
 void memoriser_position(Point p);
  
 // Avance le robot de 1.
-void avancer(Point p, Orientation o);
+void avancer(Point *p, Orientation o);
  
 // Calcule la nouvelle orientation.
-void nouvelle_orientation(Image I, Orientation o, Point p);
+void nouvelle_orientation(Image I, Orientation *o, Point p);
  
 // Tourne l'orientation du robot vers la droite.
-void tourner_a_droite(Orientation o);
+void tourner_a_droite(Orientation *o);
  
 // Tourne l'orientation du robot vers la gauche.
-void tourner_a_gauche(Orientation o);
+void tourner_a_gauche(Orientation *o);
  
 #endif

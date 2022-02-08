@@ -144,3 +144,29 @@ void ecrire_contour_file(Liste_Point L, char *sortie){
     fclose(f);
 }
  
+// Algorithme permettant de déterminer le contour d'une image, et de stocker le contour dans une séquence de points
+ 
+void contour(char *filename, char *sortie){
+    Liste_Point L = creer_liste_Point_vide();
+ 
+    Image I = lire_fichier_image(filename);
+    Point depart = trouver_pixel_depart(I);
+    Point position = creer_point(depart.x - 1, depart.y - 1);
+    Orientation o = Est;
+    bool boucle = true;
+    while (boucle){
+        L = memoriser_position(L,position);
+        avancer(&position,o);
+        nouvelle_orientation(I,&o,position);
+        if ((position.x == depart.x - 1) && (position.y == depart.y - 1) && (o == Est)){
+            boucle = false;
+        }
+    }
+ 
+    memoriser_position(L,position);
+ 
+    // écriture du contour dans un fichier texte
+ 
+    ecrire_contour_file(L,sortie);
+ 
+}

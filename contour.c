@@ -2,6 +2,7 @@
 #include "contour.h"
 #include "image.h"
 #include "geometrie2d.h"
+#include "image.c"
  
 Point trouver_pixel_depart(Image I){
     Point depart = creer_point(1,1);
